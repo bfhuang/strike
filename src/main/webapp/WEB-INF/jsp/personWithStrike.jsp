@@ -4,14 +4,10 @@
 
 <head>
     <title>This is the title</title>
-    <style>
-        table th, td {
-            border: 1px solid
-        }
-    </style>
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/strike.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/strike.js"></script>
 </head>
 
     <body>
@@ -27,23 +23,20 @@
                 <c:set var="name" value="${personWithStrike.person.name}"/>
                 <c:set var="strikeCount" value="${personWithStrike.strike.strikeCount}"/>
 
-                <tr>
+                <tr data-id="${id}" data-name="${name}" data-strikeCount="${strikeCount}">
                     <td>
-                        <img src="${personWithStrike.person.imgPath}" title="${personWithStrike.person.name}" height="42" width="42"/>
+                        <img class="avatar" src="${personWithStrike.person.imgPath}" title="${personWithStrike.person.name}"/>
                     </td>
                     <td>${personWithStrike.person.name}</td>
                     <td>${personWithStrike.strike.strikeCount}</td>
-                    <td>
+                    <td class="numberOfStar">
                         <c:forEach begin="1" end="${personWithStrike.strike.starCount}">
-                            <img id="star" src="img/tools/star.png" style="width:15px;height:15px"/>
+                            <img src="img/tools/star.png"/>
                         </c:forEach>
                     </td>
                     <td>
-                        <span onclick="strike(${id}, '${name}');">
-                            <img src="img/tools/hammer.jpeg" style="width:40px;height:40px;cursor:pointer"></span>
-                        <span onclick="punish(${id}, '${name}', ${strikeCount})">
-                            <img src="img/tools/star.png" style="width:30px;height:30px;cursor:pointer">
-                        </span>
+                        <span class="hammer"><img src="img/tools/hammer.jpeg"/></span>
+                        <span class="star"><img src="img/tools/star.png"/></span>
                     </td>
                 </tr>
             </c:forEach>

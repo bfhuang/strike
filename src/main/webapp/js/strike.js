@@ -1,14 +1,28 @@
-function strike(personId, name) {
-    if (!confirm('Strike on '+name+'?')) {
-        return;
-    }
+(function($){
+    $(function(){
 
-    post('/strike', {
-        personId: personId
+        $('span.hammer').bind('click',function(event) {
+            var person = getPersonIdAndName($, $(this));
+            strike(person.id,person.name);
+        });
+
+        $('span.star').bind('click',function(event) {
+            var person = getPersonIdAndName($, $(this));
+            punish(person.id, person.name, person.strikeCount);
+        });
+
     });
+})(jQuery);
+
+var getPersonIdAndName = function($, $currentElement){
+    var $trElement = $currentElement.parents('tr');
+    var id = $trElement.data('id');
+    var name = $trElement.data('name');
+    var strikeCount = $trElement.data('strikeCount');
+    return {'id' : id, 'name' : name, 'strikeCount' : strikeCount};
 }
 
-function punish(personId, name, strikeCount) {
+var punish = function(personId, name, strikeCount) {
     if(strikeCount < 3){
         alert('The strike count does not satisfy punish count!');
         return;
@@ -22,3 +36,13 @@ function punish(personId, name, strikeCount) {
         personId: personId
     })
 }
+
+var strike = function(personId, name) {
+    if (!confirm('Strike on '+name+'?')) {
+        return;
+    }
+
+    post('/strike', {
+        personId: personId
+    });
+ }
