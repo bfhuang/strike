@@ -15,7 +15,7 @@
             <th>Head portrait</th>
             <th>Name</th>
             <th>strike count</th>
-            <th>start count</th>
+            <th>star count</th>
             <th>operation</th>
 
             <c:forEach items="${persons}" var="personWithStrike" varStatus="status">
@@ -23,13 +23,13 @@
                 <c:set var="name" value="${personWithStrike.person.name}"/>
                 <c:set var="strikeCount" value="${personWithStrike.strike.strikeCount}"/>
 
-                <tr data-id="${id}" data-name="${name}" data-strikeCount="${strikeCount}">
+                <tr id="person_${id}" data-id="${id}">
                     <td>
                         <img class="avatar" src="${personWithStrike.person.imgPath}" title="${personWithStrike.person.name}"/>
                     </td>
-                    <td>${personWithStrike.person.name}</td>
-                    <td>${personWithStrike.strike.strikeCount}</td>
-                    <td class="numberOfStar">
+                    <td class="personName">${personWithStrike.person.name}</td>
+                    <td class="strikeCount">${personWithStrike.strike.strikeCount}</td>
+                    <td class="stars">
                         <c:forEach begin="1" end="${personWithStrike.strike.starCount}">
                             <img src="img/tools/star.png"/>
                         </c:forEach>
